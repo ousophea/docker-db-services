@@ -1,0 +1,41 @@
+# create network
+# docker network create -d overlay --attachable  external_network
+
+version: '3.8'
+
+services:
+  sample_mysql:
+    container_name: sample_mysql
+    image: mysql:latest
+    restart: unless-stopped
+    tty: true
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: sample_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - sample_mysql:/var/lib/mysql
+      - ./sql_script/create_sample_user_table.sql:/docker-entrypoint-initdb.d/create_sample_user_table.sql
+    networks:
+      - external_network
+
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8383:80"
+    restart: always
+    environment:
+      PMA_HOST: sample_mysql
+      MYSQL_ROOT_PASSWORD: root
+      UPLOAD_LIMIT: 100M
+    networks:
+      - external_network
+
+networks:
+  external_network:
+    external: true
+
+volumes:
+  sample_mysql:
