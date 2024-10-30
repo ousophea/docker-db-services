@@ -9,9 +9,15 @@ This project sets up a Docker environment with a MySQL database and a PHPMyAdmin
 
 **Getting Started**
 
-1. **Clone the Repository:**
+1. **Create network:**
+   ```bash
+   docker network create -d overlay --attachable  external_network
+   ```
+   
+2. **Clone the Repository:**
    ```bash
    git clone https://github.com/ousophea/docker-db-services.git
+
    cd docker-db-services
    ```
 
