@@ -11,8 +11,8 @@ This project sets up a Docker environment with a MySQL database and a PHPMyAdmin
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://gitlab.com/your_username/your_project_name.git
-   cd your_project_name
+   git clone https://github.com/ousophea/docker-db-services.git
+   cd docker-db-services
    ```
 
 2. **Start the Services:**
